@@ -1,0 +1,15 @@
+{% extends "layout.html.j2" %}
+
+{% block title %} Hello-Home {% endblock %}
+
+{% block content %}
+
+<div>
+    {% if _name %}
+    <p>Hello, {{_name | capitalize}}!</p>
+    {% else %}
+    <p>Hello, World!!</p>
+    {% endif %}
+</div>
+
+{% endblock %}

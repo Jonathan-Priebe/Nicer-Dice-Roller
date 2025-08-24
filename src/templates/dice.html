@@ -1,0 +1,62 @@
+{% extends "layout.html.j2" %}
+
+{% block title %} Dices {% endblock %}
+
+{% block content %}
+
+    <div class="centerd-content">
+    
+    {% if _dices %}
+        <p>Look at this dices</p>
+        <ul>
+            {% for dice in _dices %}
+            <li> {{ dice["numberOfSides"] }} side dice </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No dices available</p>
+    {% endif %}
+
+    <button id="add-dice-btn" onclick="showNewButtonForm()">Add new dice</button>
+    
+    <form id="add-dice-form" style="display: none; margin-top: 1em;">
+        <label for="sides-input">Enter the number of sides for the new dice</label>
+        <input type="number" id="sides-input" name="numberOfSides" min="2" required>
+        <button type="submit">Submit</button>
+    </form>
+    
+    <script>
+        function showNewButtonForm() {
+            document.getElementById("add-dice-form").style.display = 'block';
+            document.getElementById("add-dice-btn").style.display = 'none';
+        }
+
+        async function addNewDice() {
+            const sides = document.getElementById("sides-input").value;
+            try {
+                const response = await fetch('/api/dices', {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'}, 
+                    body: JSON.stringify({numberOfSides : Number(sides) })
+                });
+
+                if (response.status > 400) {
+                    throw Error('Something went wrong');
+                }
+                // Optionally, reload or update the dice list here
+                location.reload();
+            }
+            catch (error) {
+                alert(error.message)
+            }
+        }
+        document.getElementById("add-dice-form")
+            .addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await addNewDice();
+        });
+    </script>
+
+    </div>
+
+{% endblock %}

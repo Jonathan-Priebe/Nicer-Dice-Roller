@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Error occured</title>
+    <script>
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 5000)
+    </script>
+</head>
+<body>
+    <div class="centerd-content">
+        <h1>An Error occured</h1>
+        <P>There was an error processing your request.</P>
+        <P>Error-Name: {{ error_name }}</P>
+        <P>Error-Message: {{ error_message }}</P>
+        <P>Error/Status-Code: {{ status_code }}</P>
+        <a href="/">
+            Go back to home. You will be auto-delegate to the homepage in a few seconds
+        </a>
+    </div>
+</body>
+</html>

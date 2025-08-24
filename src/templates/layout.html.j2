@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+    <title> {% block titel %}{% endblock %} - Dice-Roller!</title>
+    {% endblock %}
+</head>
+<body>
+    <a href="/" style="text-decoration: none; color: inherit;">
+        <div id="header">
+            <h1>Nicer Dice-Roller!</h1>
+        </div>
+    </a>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+            &copy; Copyright - 2025 by
+            {% block author %}
+                {{ _author | default("YOU") }}
+            {% endblock %}
+        {% endblock %}
+    </div>
+</body>
+</html>
